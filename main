@@ -1,1 +1,44 @@
 
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+let produtos = [];
+
+app.get('/produtos', (req, res) => {
+    res.json(produtos);
+});
+
+app.post('/produtos', (req, res) => {
+    const produto = req.body;
+    produtos.push(produto);
+    res.status(201).json(produto);
+});
+
+app.put('/produtos/:id', (req, res) => {
+    const { id } = req.params;
+    const produtoAtualizado = req.body;
+
+    if (!produtos[id]) {
+        return res.status(404).json({ erro: "Produto não encontrado" });
+    }
+
+    produtos[id] = produtoAtualizado;
+    res.json(produtoAtualizado);
+});
+
+app.delete('/produtos/:id', (req, res) => {
+    const { id } = req.params;
+
+    if (!produtos[id]) {
+        return res.status(404).json({ erro: "Produto não encontrado" });
+    }
+
+    produtos.splice(id, 1);
+    res.json({ mensagem: "Produto removido com sucesso" });
+});
+
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000");
+});
