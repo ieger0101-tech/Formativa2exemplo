@@ -1,1 +1,11 @@
+app.put('/produtos/:id', (req, res) => {
+    const { id } = req.params;
+    const produtoAtualizado = req.body;
 
+    if (!produtos[id]) {
+        return res.status(404).json({ erro: "Produto não encontrado" });
+    }
+
+    produtos[id] = produtoAtualizado;
+    res.json(produtoAtualizado);
+});
