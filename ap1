@@ -1,1 +1,5 @@
-
+git add .
+git commit -m "chore: inicializa projeto Node"
+git commit -m "feat: adiciona express"
+git commit -m "feat: cria servidor básico"
+git commit -m "chore: adiciona gitignore"
