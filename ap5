@@ -1,1 +1,11 @@
 
+app.delete('/produtos/:id', (req, res) => {
+    const { id } = req.params;
+
+    if (!produtos[id]) {
+        return res.status(404).json({ erro: "Produto não encontrado" });
+    }
+
+    produtos.splice(id, 1);
+    res.json({ mensagem: "Produto removido com sucesso" });
+});
